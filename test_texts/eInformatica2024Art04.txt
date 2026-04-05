@@ -1,0 +1,654 @@
+Abstract
+Background: In software engineering, each software product has a life cycle that at
+some point results in a decision being made with regard to extending its maintenance or
+upgrading the system to a new platform and architecture via a re-engineering or migration
+process. However, sometimes this decision is a non-starter; the technical dept accumulates,
+and platforms cease to exist, meaning that there will always be a time when extending
+the life support of a legacy system is no longer simply an option, and the service must be
+modernized.
+Aim: In this paper, we focus on the migration processes, where a legacy system is updated
+to a microservice architecture, to understand the current state-of-the-art, applied industry
+practices and potential pitfalls or research gaps in the topic domain. The study aims to
+explore previous research to find related trends and expose gaps in the literature.
+Method: We conducted a systematic mapping study on the research trends within the
+topic of redesign and re-engineering projects related to microservice architectures to
+understand what we know about microservices, what the current research trends in the
+area are, and if possible, what the common nominators for successful migration processes
+are.
+Results: Our observations reveal that most microservice migration research is confined to
+journal articles and conference proceedings. However, a severe fragmentation in publication
+venues exists within the field. Furthermore, the focus of the research field is primarily
+on the transformation phase of the re-engineering process, with the majority of the
+contributions being managerial in nature, particularly of the process type. Additionally,
+over 50% of the research conducted is empirical in nature.
+Conclusion: Based on the results, microservice migration research is maturing well; most
+of the research is empirical. The research field is scattered. There are notable technical,
+managerial, and organizational challenges and differing motivations. To better understand
+the motivations and challenges of the practitioners, we are going to conduct survey and
+interview studies within this field.
+Keywords: legacy systems, microservice architecture, monolithic architecture,
+microservice migration
+1. Introduction
+In the software life cycle, each product reaches a point where a decision has to be made
+between extending the system maintenance, killing the software, or modernizing and
+migrating the legacy system into a new architecture and modern platform. In this work,
+© 2024 The Authors. Published by Wrocław University of Science and Technology Publishing House.
+This is an open access article under the CC BY
+license international.
+Submitted: 13 Jun. 2023; Revised: 14 Nov. 2023; Accepted: 15 Nov. 2023; Available online: 17 Nov. 2023
+we conducted a systematic mapping study (SMS) [1] to study one such legacy software
+modernization trend – the trend of migrating monolithic legacy software systems toward
+microservice architecture (MSA). MSA has become popular due to recent technological
+advancements, such as cloud computing and containerization, which promise to allow easier
+service scaling, cost management, maintenance, and faster development cycles, amongst
+other benefits. Furthermore, the overall digitalization of the business world is forcing
+companies to search for more dynamic and adaptive software architectures.
+1.1. Microservice technology
+Microservices are small, self-sufficient processes that interact with each other using messaging protocols, such as Representational State Transfer (REST) [2–4]. MSA is a distributed
+cloud-native architecture that is based on service architecture (SOA) [5, 6], where developers
+can create, test, and deploy microservices using different development stacks and platforms
+[5]. Traditionally, the software has been developed as monolithic, meaning that a single
+executable handles all the features of a given software system [6].
+Three core technologies are often utilized when using MSA. First is cloud computing;
+microservice based systems often run in a cloud environment where computing resources
+can be scaled up or down depending on the user traffic. The second is containerization;
+microservices are often containerized, which enables them to be deployed quickly and
+managed by container management software, such as Kubernetes [7]. Third, continuous
+integration and delivery automation processes [8] mean that the entire process, from
+development and quality assurance to staging and deployment, is automated to enable fast
+iterations and even roll-backs in case of faulty releases.
+1.2. State of the industry
+The research related to microservices has seen an increase during the past decade. In around
+2010, the term microservice started to rise in popularity [9], with many large companies
+using MSA to build their software systems. For example, Sound Cloud [10], Netflix [11],
+and Uber [12] have adopted MSA as their service architecture. However, as the MSA model
+is mainly based on industry-driven needs and development, this might also correlate to the
+need for more literature and stricter definitions of MSA [13].
+Large and complex monolithic software systems are prime candidates for MSA migration.
+Software systems built with MSA are less prone to accumulating complexity during
+their lifetimes. Software developed with distributed architecture is more self-contained
+than software with a monolithic architecture. It allows components to be developed and
+maintained separately from other parts, allowing the software system to stay robust and
+responsive [4]. Companies often choose to adopt MSA depending on their needs, as MSA
+has a reputation for having quality attributes such as availability, flexibility, maintainability,
+scalability, and loose coupling as built-in features [14, 15].
+The motivation for this research arose from a previous study where we documented
+migrating from a legacy system to an MSA. During the research process, we found a lack
+of related research into migrating from legacy systems to MSA, which was unusual as the
+revision, replacement, and re-engineering work of legacy systems is not in any way an
+uncommon activity in the software industry. For this reason, we decided to conduct a more
+comprehensive literature review on migrating from legacy software to MSA.
+This study aims to explore previous research to find related trends and expose gaps
+in the literature. In this study, we want to review the literature on migrating to MSA
+from legacy systems. More precisely, we want to study the research trends (publication
+venues and periods), the migration process phase in which migration to MSA research is
+focused (reverse engineering, transformation, or forward engineering), and the research
+contribution types to understand how MSA migration processes have been investigated
+in the prior works. The rest of this research paper is structured as follows: related work,
+methods, analysis, threats to validity, discussion, and conclusion.
+2. Related work
+This section discusses the research related to our topic: migrating to MSA. We will give
+short summaries of the related research papers, discuss their relevance to this study, and
+synthesize how they motivated it.
+Carrasco et al. [16] conducted a literature study on microservice migration bad smells.
+They wanted to know what architectural and migration-related bad smells are common with
+MSA and how to avoid them. Their study identified nine common pitfalls as architectural
+smells from 58 sources, including academic and gray literature, between 2014 and 2018. The
+nine pitfalls are divided into five new architectural bad smells and four migration-related
+smells. The most common pitfalls were single-layered teams, including multiple services in
+one container, being greedy with containers, and simultaneously rewriting the entire system
+for microservices. They offer solutions for detecting and solving the pitfalls mentioned
+earlier. Carrasco et al.’s [16] research has an architectural focus, researching architectural
+pitfalls. Their study relates to ours by investigating the migration process toward MSA.
+However, they focus on specific architectural problems, whereas our work is more general
+and considers the literature and its visible trends. They also use grey literature, while we
+focus on academia [16].
+In 2018, Knoche et al. [17] conducted a survey study on German professionals with 71
+participants. They studied the primary drivers for MSA adoption, barriers to adoption, the
+goals of modernizing MSA, and how data consistency affects performance. They conclude
+that the prime drivers for modernization are scalability, maintainability, and time to market.
+The skills of developers and other staff were seen as the main barriers. As for goals, early
+adopters desired scalability from MSA, while traditional companies wanted maintainability.
+Performance was considered a minor issue. The authors call for similar work from other
+countries. They also researched migration to MSA. However, they conducted an empirical
+study in the form of a survey study. Furthermore, their research focuses on the motivation
+for migration and the barriers to adoption [17].
+Velepucha et al. [18] conducted an SMS on migrating to microservices. The study
+included 32 primary research papers from 2012 to 2020. The research papers were only
+from academia. In their study, Velepucha et al. wanted to determine the types of migration
+proposals present in the literature and which are based on the information hiding principle.
+They found multiple proposals related to migrating to microservices, for example, those
+using DevOps, cloud computing, and performance in infrastructure. They identified that
+only two papers discussed migration principles, of which only one was the information
+hiding principle. None of the research papers proposed a software development principle to
+migrate from a monolithic system to MSA [18]. Our work shares some similarities with
+Velepucha et al. [18] as they also classified research papers based on the type of research.
+However, unlike our approach, they did not use Wieringa et al.’s [19] classification. We
+limited our review to literature published after 2015 as we focused on the current state of
+the art rather than the early stages of MSA. Additionally, we analyzed various metrics
+related to research approaches and publication year, venue, and type.
+Hassan et al. [20] conducted a large SMS based on academic and industrial literature.
+They analyzed 877 publications from various sources between January 2013 and April 2020.
+Their study had two objectives: first, to study the transition process to microservices and,
+second, to understand the fundamental problem of transitioning, the granularity problem of
+transitioning to microservices. Additionally, they classified the analyzed literature [20]. Our
+research shows some similarities with the SMS conducted by Hassan et al. [20] regarding
+MSA migrations. Like us, they also used the classification schema by Wieringa et al. [19] to
+classify their research. However, their research mainly focused on the issue of granularity
+when transitioning to microservices. Additionally, their study included grey literature,
+which is not the case in our research.
+Auer et al. [21] conducted an interview study. They researched why companies migrate
+to MSA, the information metrics used, and the most helpful information metrics. Their
+interview study included 52 respondents from software development practitioners over five
+days in 2018. Based on the interviews, the authors generated an assessment framework to
+ease the decision-making when migrating to MSA. Their interviews with practitioners found
+that the most common reason for migrating to MSA was to improve maintainability. Other
+common reasons were independent teams, deployability, and cost, whereas modularity,
+complexity, fault tolerance, scalability, and reusability were less popular characteristics.
+The research by Auer et al. [21] relates to our study by discussing the MSA migration
+process. However, their study focuses on the motivation of the practitioners and the metrics
+they use to collect information. In contrast, our study focuses more on general information
+about the research field, the re-engineering phase, and the research contribution types.
+Moreover, their study is a survey study rather than an SMS [21].
+Razzaq et al. [22] conducted an SMS study on MSA migrations. The study included
+73 primary research papers from 2010 to 2021. Their goal was to evaluate the state and
+practice of MSA literature. They researched publication trends and venues, research focus,
+migration approaches and challenges, success factors post-migration, and the potential
+for industrial adoption. Related to the publication trends, they note that the volume of
+publications is progressively rising. They suggest future researchers focus on MSA in the
+context of the Internet of Things [22]. Razzaq et al. [22] and our study analyze publication
+trends, venues, and types. However, our approach differs as we delve into the publication
+contributions and re-engineering phase the research focuses on.
+Our study on SMS migration to MSA did not have much directly comparable research
+available. However, we have identified the research papers that are most similar to our
+study in terms of the research period, method, contributions, and goals. The list of these
+research papers can be found in Table 1. While we found more secondary research related
+to MSA from different perspectives, there was no MSA-related research available in 2014,
+according to secondary sources cited in [23] and [24]. There has been a significant increase
+in MSA-related research since 2015 [23] and 2016 [24]. Waseem et al. [25] also reported
+a growth in MSA-related research between 2015 and 2018 [25]. Pahl et al. [23] suggest that
+follow-up research should be directed toward aspects such as microservices migration [23].
+Furthermore, multiple authors highlight the novelty of the MSA research field [13, 20, 23, 24].
+More recently (2022), Razzaq et al. [22] reported a progressively rising number of research
+from year to year.
+Many of the studies in our related research indicate the novelty of the research field and
+room for more research from different perspectives, including research within the subfield
+of migrating to MSA. We only found six directly related studies [16–18, 20–22], from which
+only four [16, 18, 20, 22] were SMSs. Our research attempts to fill this gap by summarizing
+the current state of research related to MSA migrations and by observing the specific
+re-engineering phase where the research is focused.
+3. Methods
+This section goes through the main phases of our research process; we followed the SMS
+guidelines described by Petersen et al. [1], also illustrated in Figure 1. An SMS is a research
+methodology that categorizes research papers and visualizes these to create a map of the
+researched subject [26] in the form of a conceptual map, categorization, or some other
+layout. An SMS is recommended as the research methodology in software engineering when
+the research area is still emerging and a substantial quantity of high-quality studies have
+yet to be completed. However, the data collection and analysis scheme is not as in-depth
+in similar systematic literature review models [26]. SMSs are commonly used in several
+domains [27], with medicine and software engineering being the most prominent areas of
+application [28]. The main phases of our research process are defining research questions,
+conducting the search, screening papers, keywording, and data extraction and mapping,
+as defined by Petersen et al., with all the phases having an output forwarded to the next
+stage; the final product is the systematic map that visualizes the results.
+Based on our background work, we defined three research questions for this study.
+We wanted to research the period from 2015 to 2023 to capture the trends found in the
+microservice migration literature during that time and minimize the number of non-related
+topics that might share similar terminology; we also wanted to analyze the research trends,
+the focus of research within the re-engineering process, and the contributions of the existing
+research work. These goals are reflected in the research questions as follows:
+RQ1 – What are the research approaches implemented by the researchers?
+This research question provides us with general information about the research field,
+which is important for analyzing the current trends in the literature.
+RQ2 – What phase of the re-engineering process is addressed by the research papers?
+The answer to this research question allows us to analyze which part of the re-engineering
+process is the most researched and where gaps in the research exist. We used the
+horseshoe model to define the different phases of re-engineering [29].
+RQ3 – What are the contribution types of the research papers?
+This question explores the concrete contributions to microservice migration research
+and the broader scientific community. We developed a contribution-type classification
+using an iterative process based on an example by Petersen et al. [1].
+We used Google Scholar’s research database to get research material for this SMS.
+We chose to use Google Scholar because it obtains research material from many different
+publishers and databases, such as ACM, IEEE, and Springer while having few to no
+limitations regarding the research domains or areas of expertise. Google Scholar can query
+articles with words using the following options: all, exact phrase, at least one, and without.
+These different options can be combined. It is possible to select where in the article the
+words appear: anywhere in the article or only in the title. Additionally, the author and
+publisher of the article can be specified, and publication dates can be indicated. We used
+the default search, which returned articles that included all the words from our search
+string, and looked for the latter anywhere in the article [30]. The only limitations we set
+for Google Scholar were not to include patents and the time frame. Google Scholar orders
+the results according to their relevance based on the full text, source, author, and number
+of citations [31].
+The search was conducted using a search string developed by testing keywords against
+the database. The goal was to find a search string that yielded all the meaningful research
+papers that reflect the research area. The search results were evaluated manually to estimate
+whether they matched the research area. The evaluation was performed by the number
+of citations, the text’s topic (related to the research topic), the author, and the source.
+As suggested by Petersen et al. [1], the search string reflected the research questions.
+The final search string was “microservices legacy software migration modernization”. We
+conducted two searches on Google Scholar: the first in 8/2020 (from 2015 to 8/2020) and
+the second in 8/2023 (from 2020 to 8/2023) to update the primary research papers. The
+search yielded 487 initial results in 2020 and an additional 821 results in 2023, giving
+a total of 1308 search results. Because Google Scholar’s results change over time, we
+have saved the original search results list to a cloud service for repeatability purposes
+(https://dx.doi.org/10.6084/m9.figshare.24426889).
+Selection criteria were applied to the search results to filter out the unwanted results.
+The filtering used the inclusion and exclusion criteria shown in Tables 2 and 3, respectively.
+The number of citations was not considered as it would have given a less realistic view
+of the research area. Figure 2 shows the search process and application of the selection
+criteria. First, we applied our selection criteria to the initial research and removed any
+duplicates that could be identified. Later, during the data extraction phase, a few papers
+were removed as they did not fit the scope of this study.
+Research with more than four pages of text.
+Research from 2015 to 8/2020 in the first search and 2020 to 8/2023 in the second search
+Research in the following publication formats: books, research papers, conference papers, and
+journal articles.
+Research written in English.
+Research that is publicly accessible.
+Research that explicitly discusses the theme of this SMS (i.e., the migration of legacy software
+systems to MSA).
+Exclusion criteria
+Research duplicates matched with regard to the author, publication year, and title.
+Research that is not peer-reviewed.
+Research discussing microservices but not the process for migrating to MSA.
+We used existing and generic classification methods to manage the data extraction
+process for the first two research questions. We generated a classification through the
+keywording process for the third research question. For the research approaches (RQ1), we
+used the following parameters: publication type, venue, and date; publisher; and research
+strategy. This research question queries general information about the research field. For
+the publication type, we use a simple categorization: journal, workshop paper, book, or
+conference proceeding and the publication venue, publisher, and date. Finally, we used the
+classification by Wieringa [19] to classify the research strategies, illustrated in Table 4. This
+categorization method is general and does not depend on any specific research field [1].
+For the re-engineering phase (RQ2), we used the horseshoe model to divide the re-engineering process into reverse engineering, transformation, and forward engineering. Reverse
+engineering includes the acts of understanding, abstracting, and extracting a high-level
+model of the source system. For example, this could include software that helps understand
+existing systems or identifies microservice candidates. Transformation improves, restructures, and extends the previously mentioned high-level system model. For example, this
+could be in the form of processes or tools that help shape the new architecture. Finally,
+forward engineering generates a new, improved system [29]. For example, this could include
+guidelines and tools that help generate the new system in practice. We categorized the
+The techniques investigated are novel and have not yet been implemented. The
+techniques used are, for example, experiments (i.e., work done in the lab).
+Techniques are implemented in practice and evaluated. This type of research
+shows how a technique is implemented in practice (solution implementation)
+and the consequences of the implementation in terms of benefits and drawbacks
+(implementation evaluation). This also includes identifying problems in the
+industry.
+A solution for a problem is proposed; the solution can be either novel or a significant extension of an existing technique. A small example or a good line of
+argumentation shows the solution’s potential benefits and applicability.
+These papers sketch a new way of looking at existing things by structuring the
+field in the form of a taxonomy or conceptual framework.
+These papers express the opinion of somebody on whether a certain technique is
+good or bad or how things should be done. They do not rely on related work
+and research methodologies.
+Experience papers explain what and how something has been done in practice
+based on the author’s personal experiences.
+research papers by reading them and assigning them to one or more categories based on their
+topics and content, as a research paper can discuss multiple phases of the re-engineering
+process.
+Finally, to assess the research contributions (RQ3), we classified them using an iterative
+keywording process by Petersen et al. [1]. We read through the studies and collected
+keywords and concepts representing their contributions. The context of the research was also
+identified. After collecting the keywords, we combined them to form a classification scheme.
+The classification scheme we ended up with consists of the following: process, analysis, tool,
+method, best practices, experience sharing, and metrics. A process is a structured approach
+to migrating to MSA. Analysis covers papers focusing on migration’s issues and benefits
+and other literature. The tool assists in the migration process (i.e., software that can help
+with the migration process). A method provides systematic ways to achieve specific tasks
+within the broader migration process. Best practices are guidelines based on successful
+migrations. Experience sharing offers practical insights from real-world migration scenarios.
+The metrics can measure and evaluate different aspects of the migration process.
+4. Analysis
+This study aims to discover trends related to legacy software modernization, specifically
+migrating from legacy applications to microservices. The study was conducted as an SMS.
+A pool of 1308 research papers was the starting point. After the inclusion and exclusion,
+109 were chosen for further analysis and categorization. In this section, we analyze the
+results of the categorization process.
+4.1. Research areas and approaches (RQ1)
+In this section, we review the results of the first research question: “(RQ1) What are the
+research approaches?” The first research question queried the research approaches and
+Journal Article
+publication information in relation to the primary research. These include the publication
+venue, publication time, publication type, and research type. The publication information
+helps us understand the current state of the research field and find any gaps that need to
+be filled.
+We divided the publications into four groups: journal articles, conference papers, books,
+and workshop papers. Figure 3 shows the total numbers of the different publication types.
+Most research papers were either conference papers (58%) or journal articles (34%). In
+contrast, there is a relatively small amount of workshop papers.
+Figure 4 shows the number of publications published annually from 2015 to 2023. It
+should be noted that 2023 has only partial data, as this study was conducted during the
+fall of that year. Also notable is that, in our primary research, there were no publications
+from 2015; the first MSA migration-related publications in our primary research material
+are from 2016. The lack of research is understandable since microservice technology only
+started to attract interest from 2010 onward [9]. We can observe a significant increase
+in publications from 2018, with a slight decrease in 2019 and a steady level thereafter.
+Regarding the publication types, we can see that conference papers and journal articles
+have more stable publication numbers than books and workshop papers.
+With regard to the various publication venues listed in Table 7, we can see severe
+fragmentation; only a few research papers are published through the same publication venues,
+meaning that 109 research papers are published through 91 different ones. The exceptions
+are the IEEE ICSA-C conference (4), IEEE Software Journal (3), IEEE International
+Conference on Software Architecture (ICSA) (3), Euromicro Conference on Software
+Engineering and Advanced Applications (SEAA) (3), and International Journal of Advanced
+Computer Science and Applications (IJACSA) (3), all with three or more publications.
+The publication venues also have distinct focus areas, for example, software architecture
+(i.e., ICSA, ICSA-C), cloud computing (i.e., ESOCC), software maintenance (i.e., ICSME,
+VEM), development operations (i.e., DEVOPS), software refactoring (i.e., IWoR), data
+analysis (i.e., SADASC), and software engineering (i.e., APSEC, SBES, and SEAA). The
+rest of the publication venues are listed in Table B1 in Appendix B.
+Table 7. Publication venues with more than one publication from our primary research papers.
+The rest of the publication venues are listed in Appendix B
+Publication venue
+IEEE International Conference on Software Architecture Companion
+(ICSA-C)
+IEEE Software
+IEEE International Conference on Software Architecture (ICSA)
+Euromicro Conference on Software Engineering and Advanced Applications
+(SEAA)
+International Journal of Advanced Computer Science and Applications
+(IJACSA)
+Software: Practice and Experience
+On the Move to Meaningful Internet Systems: OTM Workshops
+International Journal of Computer Applications (IJCA)
+Software Engineering Aspects of Continuous Development and New
+Paradigms of Software Production and Deployment (DEVOPS)
+Brazilian Symposium on Software Components, Architectures, and Reuse
+(SBCARS)
+Empirical Software Engineering (EMSE)
+International Conference on Advanced Information Systems Engineering
+(CAiSE)
+The research types were analyzed using the classification schema by Wieringa et al. [19].
+We chose this classification method because of its wide use in other systematic mapping
+studies (e.g., Di Francesco [24], Agilar et al. [32], Alshuqayran et al. [13]) and because it is
+often possible to classify a study without reading the whole paper, which saves time [1].
+The classification schema consists of the following categories: validation research, evaluation
+research, solution proposals, philosophical papers, opinion papers, and experience papers,
+as listed in Table 2.
+Figure 5 shows the distributions of the research types. The most used research type is
+validation research (33%), which investigates novel techniques in controlled environments.
+Philosophical papers (23%) are the second most popular research type; these papers review
+the research area and create taxonomies and conceptual frameworks. The third most
+popular research type is evaluation research (19%), meaning that many researchers are
+testing their techniques in practice and showing the benefits and drawbacks of those
+techniques (evaluating their implementations). The fourth most popular research type is
+experience research (13%), indicating that many researchers in this field only reported
+their experiences. Finally, the least popular research types are solution proposals (12%)
+and opinion papers (0%).
+The research types can be divided into empirical and non-empirical research. Nonempirical types are solution proposals, opinion papers, experience papers, and philosophical
+papers. Empirical study types are validation and evaluation research. Most of the studies
+(52%) are empirical and use verified data and observations to support research results,
+while only (48%) are non-empirical. Empirical studies are critical for validating theories,
+models, tools, and other migration-related artifacts.
+4.2. Re-engineering phase (RQ2)
+The second research question deals with the re-engineering phase: “(RQ2) What phase of
+the re-engineering process is addressed by the research papers?” To research this question,
+we utilized the horseshoe model, which divides the re-engineering process into three phases:
+reverse engineering, transformation, and forward engineering [29]. We classified the primary
+research papers according to the three re-engineering phases. The distribution of the
+re-engineering phases can be seen in Figure 6. It should be noted that a research paper can
+cover multiple re-engineering phases, meaning that the sum of the results is not the sum of
+the research papers. Almost half of the research papers (48%) focused on transformation,
+Transformation
+Forward engineering
+while around a third (30%) covered reverse engineering, and around a fifth (22%) focused
+on forward engineering, as shown in Figure 6.
+4.3. Contributions to the domain (RQ3)
+This section answers the third research question: “(RQ3) What are the contribution types
+of the research papers?” Seven different contribution categories were identified from the
+research papers: process, experience sharing, best practice, analysis, method, tool, and
+metric. Figure 7 shows the distribution of the research contributions. Nearly half (44%) of
+the research papers contributed to the research topic with a process, most often describing
+the actions that can or should be taken to accomplish the goal of migrating to MSA. After
+the process, the next most popular contribution type was analysis (24%), followed by
+tool (9%) and method (8%). Conversely, best practice (7%), experience sharing (6%), and
+metrics (2%) were the least common contribution types.
+To better understand the contributions, they can be further categorized according to the
+contribution type into technical and managerial contributions. Agilar et al. [32] used this
+categorization method in their research for a similar purpose. A managerial contribution
+describes a process, method, or approach that manages the migration process. A technical
+Figure 7. Distribution of the research paper contribution types toward
+the legacy system migration domain. References in Table 10
+contribution might be a tool, a metric, or software to support migration efforts. Using this
+categorization method on our primary research documents yielded 90% managerial and
+10% technical contributions.
+4.4. Key findings
+Our main findings are summarized in Table 11. While not all-inclusive, these gaps in the
+research and observations are worth highlighting. We can observe the publication trends,
+research approaches, and publication venues, as well as gain a better understanding of the
+MSA migration process.
+The year 2018 saw a significant increase in published research writings, mostly journal articles
+and conference papers. Overall, conference papers and journal articles dominate the publication
+types.
+Research into MSA migration has grown significantly between 2015 and 8/2023.
+Publication venues are scattered across different application domains and distinct topics.
+The primary research identified is split between empirical (52%) and non-empirical (48%)
+work.
+Primary research papers mostly focused on the transformation (48%) phase of the re-engineering
+process, rather than reverse engineering (30%) or forward engineering (22%)
+Managerial contributions account for 90% of all contributions, with processes being the most
+common type (44%).
+The first research question focused on the publication trends related to the primary research.
+Based on our results, the research on migrating legacy systems to MSA has increased from
+2016 onward, as seen from Figure 4. Our primary research found no papers related to
+MSA migrations from 2015. However, the increasing number of publications in our primary
+research suggests growth, possibly supported by technological innovations (cloud platforms,
+containers, and DevOps), shifts in the software architectural landscape, and a move away
+from monolithic architecture and toward distributed architecture. Related to the growth of
+MSA migration research, we observed common motivations for migration in the primary
+research papers: scalability (P5, P8, P12, P17, P19, P21, P25, P27, P28, P32, P42, P47,
+P58, P65, P71, P86, P87, P90, P103, P106, P107, P109), maintainability (P1, P2, P8, P18,
+P24, P25, P28, P32, P38, P42, P51, P65, P66, P77, P86, P103), time to market (P8, P30),
+adaptability to new technologies (P2, P25, P30), and flexibility (P42, P56, P57, P87, P90,
+P107). A possible reason for these motivations may be the need for more flexible software
+architectures in the increasingly digitalized world.
+The distribution of research types in our primary research is dominated by validation
+research (33%), suggesting a strong emphasis on testing and validating new research
+artifacts in controlled settings. Research in the field of philosophy (23%) often involves the
+creation of taxonomies and conceptual frameworks, which provides clarity to the field and
+suggests a mature research area. Evaluation research, which accounts for 19% of the research
+conducted, serves as a bridge between theory and practice. The significant representation
+of evaluation research suggests that the field of research is increasingly focused on applying
+theoretical knowledge to practical situations and discovering the practical benefits and
+limitations of research techniques. Experience research accounts for only 13% of the data
+and is based on anecdotal evidence, lacking in testing or validation. Nevertheless, it still
+provides valuable real-world information. The presence of experience research indicates
+that practical insights and lessons learned from practitioners are still highly valued in the
+field. Solution proposals account for only 12% of papers in the field, focusing on validating
+rather than proposing new solutions.
+Related to the research type, we found that a majority of it is empirical, indicating that
+the research field is developing and becoming more mature. This suggests that researchers
+are gaining a better understanding of the challenges, benefits, and nuances of migrating to
+MSA by validating their theories and strategies with real-world data. The abundance of
+validation and evaluation research also indicates that researchers are willing to test and
+improve the existing theories and strategies related to the migration process. Additionally,
+practitioners can benefit from the wealth of tried and tested tools, processes, and techniques
+available to them. Meanwhile, researchers have the opportunity to develop new methods
+by building on previous successful ones or experimenting with untested approaches.
+Our primary research publications are mostly journal articles or conference proceedings.
+Similar results are reported in the related research by Di Francesco et al. [24] and Hassan
+et al. [20]. The tilt toward journals and conferences is understandable as they are more
+scientifically rewarding than workshop publications. Targeting more challenging publication
+venues is a good sign as that indicates that the research is of higher quality. We also
+observed fragmentation in the publication venues, as was also noted by Di Francesco et
+al. [24]; their study did not directly relate to ours as it focused on architecting with MSA
+rather than migrating to MSA; however, there is a clear parallel between their findings
+and ours regarding the publication venues. The fragmentation of publication venues
+suggests that researchers approach the MSA migration process from multiple disciplines
+with differing concerns. The fragmentation can also make it difficult for researchers and
+practitioners to navigate the literature on MSA migrations. This can make it challenging
+to identify influential research, gather knowledge, and ensure comprehensive coverage when
+conducting literature reviews. Furthermore, the fragmentation can cause redundancy as
+multiple researchers may work on similar research in isolation. For practitioners, this can
+cause obstacles when trying to access the latest best practices available, which can delay
+the introduction of new ones.
+The second research question queried the phase of the re-engineering process that the
+research papers discussed. It was found that the most commonly discussed re-engineering
+phase was transformation, accounting for 48% of the papers, which was more popular
+than reverse engineering (30%) and forward engineering (22%). The difference between
+the transformation phase and the other re-engineering phases indicates that researchers
+are most interested in studying tools, workflows, and processes that transition the legacy
+architecture to a more modern form. This might imply that while reverse engineering and
+forward engineering are essential, the transformation phase is the most difficult of the
+three or that there are more well-established practices in the other two. From the primary
+research, we observed the following challenges related to the re-engineering process: the
+absence of suitable decomposition approaches (P28), the high level of coupling between
+software components (P23, P26, P27, P30, P35, P84), the lack of guidelines and best
+practices for migration (P7, P27, P30, P50, P67), and the identification of microservices
+from existing systems and boundary recognition (P3, P11, P13, P16, P17, P27, P28,
+P30, P32, P33, P34, P36, P39). However, many solutions are also proposed to identify
+microservices (P53, P55, P59, P61, P78).
+The third research question aimed to identify the types of contributions made in each
+research paper. The results showed that the most popular contribution type was process
+(44%), which indicates that migration is a challenging task that requires precise and
+straightforward processes to guide practitioners. The analysis research type accounted for
+24% of research, indicating interest in understanding migration’s issues and benefits. Out of
+all the research articles, 9% describe tools. This indicates that the field is gradually moving
+toward creating software that can help with the migration process. However, further research
+into tooling related to the migration process toward MSA could benefit the field. Only 8%
+of the research articles were related to the method. This suggests less focus on refining and
+introducing new techniques to address specific challenges. Best practices (7%) are crucial
+for organizations migrating to MSA. However, their relatively low percentage suggests that
+the field is still consolidating these practices. As more organizations migrate, consolidating
+and documenting best practices will become increasingly important. Experience sharing
+is only responsible for 6% of contributions. Experience sharing provides valuable lessons
+for practitioners, given the unique challenges that each migration can present. The field
+could benefit from more experience-sharing contributions. Metrics account for only 2% of
+the contribution types. Their low percentage implies that standard metrics are yet to be
+developed. As the field grows, there may be an increasing demand for standardized metrics
+to assess the MSA migrations.
+Further analysis shows that 90% of the research contributions are managerial instead
+of technical; Hassan et al. report similar results regarding MSA migration literature [20].
+The significant difference between managerial and technical contributions might be that
+managerial contributions are more relevant in the migration process.
+Other trends we noticed were the limitations of MSA, particularly that MSA is not
+a silver bullet solution for legacy migrations (P4, P5, P7, P25, P31). P4 and P7 analyzed
+different migration methods and concluded that there are many different methods for
+migration, and practitioners must choose the right one depending on their circumstances.
+The authors of P5 report on their experience working with an MSA migration project;
+they conclude that microservices are not a one-size-fits-all solution as they introduce new
+complexities into systems, and many factors, such as distribution complexities, should be
+considered before adopting this style. P31 argues that there is no single way to implement
+an MSA into an existing system but that practitioners should know the common pitfalls
+of such processes. Additionally, it is noted in P35 that there is a lack of evidence for the
+benefits of mixing different migration methods.
+Challenges worth researching are organizational challenges, such as the mindsets of
+developers during the migration process (P27), the skill sets of developers (P8, P28), and
+convincing management of the importance of migration (P30). Decentralizing databases is
+another challenge worth investigating further (P35, P26, P27, P42, P49, P68, P87, P103). In
+addition, our research suggests that the transactions between microservices are a challenge
+for practitioners to deal with, so research defining proper guidelines on migrating without
+performance degradation is critical (P6, P27, P38, P32).
+The future of migration toward MSA can be seen through various automated tools,
+frameworks, and methods for migration, identification, or refactoring. These tools are
+highlighted in the following research papers: P75, P76, P78, P86, P88, P89, P90, P91,
+P95, P96, P99, P100, P101, and P108. Advanced techniques and innovations, such as
+reinforcement learning, are introduced in papers P81, P94, P101, and P104 to support the
+migration process.
+Our research has identified areas with significant challenges or a lack of research, and we
+recommend conducting further research in these fields. Evaluation research is a significant
+part of primary research but could still be expanded. This is because practitioners find it
+challenging to adopt scientific implementations without evidence that they work in practice.
+There may be a lack of opportunities for evaluation research, as modernizing software from
+old legacy systems to MSA is still relatively rare. Additionally, companies may hesitate to
+invite researchers to join or find it hard to enter these large projects that continue for many
+years. We suggest exploring experience research and solution proposals to provide more
+real-world insights and challenges and address unresolved issues with innovative solutions.
+Regarding the fragmentation of publication venues, we suggest several potential solutions
+to address this issue. These include conducting more literature reviews that provide an
+overview of the research field, creating centralized repositories to gather literature and
+increase accessibility, organizing interdisciplinary workshops and conferences to bring
+together researchers from different disciplines working with MSA migrations, implementing
+unified standards for all publication venues, promoting open access publishing to increase
+availability, and educating new researchers about the research field.
+Related to re-engineering, much of the research is focused on the transformation phase.
+We suggest conducting more research on reverse and forward engineering to understand
+the whole migration process better. Additionally, it would be useful to investigate the
+challenges of re-engineering, such as the absence of suitable decomposition strategies and
+the handling of high coupling in software components.
+It is essential to encourage more research toward developing tools and methods that
+can support the process of migrating. The documentation and consolidation of the best
+practices for MSA migration should be promoted, and experts should share experiences to
+capture real-world insights. Developing standardized metrics for evaluating MSA migrations
+is also crucial.
+Promoting research that provides guidelines for choosing the appropriate migration
+method based on specific circumstances is important. Additionally, organizational challenges,
+such as those related to the developer mindset and skill set, as well as the role of management in
+MSA migration, should be investigated. Research on decentralizing databases and managing
+transactions between microservices can also be promoted. The development of automated
+tools, frameworks, and methods should be encouraged to simplify the MSA migration
+process. Furthermore, promoting research on advanced techniques, such as reinforcement
+learning, can help to support the MSA migration process.
+The challenges and motivations we observed from our primary research have inspired
+us to do more research in this field. In particular, we want to focus on the motivations and
+challenges related to MSA migrations. We will conduct empirical research on this topic
+using survey research and interviews.
+6. Threats to validity
+The threats to validity are classified according to the classification by Wohlin et al. [33].
+They give four categories for threats to validity: conclusion, internal, external, and construct.
+The threats that we have identified are classified as internal and external. Internal threats
+are those that can affect the study results without the knowledge of the researcher. External
+threats limit the applicability of the results to the real world.
+Regarding the internal validity threats, we implemented inclusion and exclusion criteria
+to enhance the exactness of the primary research further. As part of our criteria, we
+restricted the language to English only, which excluded 67 potential research papers from
+the study. Furthermore, we did not include any grey literature in our study. We do not
+believe that the lack of grey literature impacts the validity of our research, as peer-reviewed
+papers must go through strict quality gates, which improves the quality of the research
+papers included in this study. Another possible threat to validity is bias in selecting research
+papers. One researcher chose the research papers manually, which may have introduced
+bias in the selection process. The potential for bias was mitigated by strictly following the
+exclusion and inclusion criteria.
+In terms of the external validity threats, the research in this paper is limited to the
+research discussing the migration of legacy systems to MSA. The most critical external
+threat to the validity of this study is that we did not do backward-forward snowballing to
+gather more potential primary research papers. The potentially missed primary research
+papers mean our study may not entirely represent the MSA migration research field. We
+utilized Google Scholar to search for research articles. The results are limited by publication
+policies, which may affect the accessibility and visibility of the results. Further limitations
+of Google Scholar are the inability to create complex search strings using Boolean operators
+and nesting. It is also only possible to search based on the title or full text; it cannot define
+proximity to the searched words; it cannot use complex dates, only date ranges. In addition,
+the subject area is broad because there are no predefined sections for each subject matter.
+7. Conclusion
+Interest in MSA has seen an increase during the past decade. The interest is fuelled
+by technological advancements, such as cloud computing, automation (DevOps), and
+containerization, as well as by the overall trend of digitalization and the way software is
+consumed through the internet via browsers and mobile devices. Therefore, in this study,
+we have studied the literature related to migrating from legacy systems to MSA.
+We identified a pool of 1308 research publications and narrowed it down to 109 primary
+sources discussing migrating from a legacy system to an MSA-based system. Our first
+research question focused on the primary research and, more specifically, looked into the
+research strategy, publication year, and publication venue. The second research question
+covered the specific area of research related to migrating from legacy systems to MSA.
+Lastly, the third research question investigated the contributions of the research papers.
+From the primary document analysis, we identified the following observations. Legacy
+system to MSA migration research has increased from 2016 and reached a stable level
+from 2018 onward. The amount of evaluation research suggests that the research field is
+maturing. Another indication is that researchers in this field mostly target challenging
+publication venues (conferences and journals). Related to the publication venues, we also
+observed that there is major fragmentation in the publication forums, which suggests that
+researchers approach the MSA migration process from multiple disciplines with differing
+goals. This can make the research harder to find as it is scattered across many different
+publication forums. Regarding the focus of the research (estimated with the horseshoe
+model), we found that more studies focused on the transformation phase compared to
+reverse engineering or forward engineering. Finally, the most common research contribution
+type was a process.
+The other trends identified from the literature include migration motivations: scalability,
+maintainability, time to market, and adaptability to new technologies. We also note the
+challenges observed in the research: that MSA is not a silver bullet solution for legacy
+migrations, the decomposition of existing systems and identifying microservice candidates
+from existing legacy systems, organizational challenges, decentralizing databases, the
+migration of databases, and performance degradation during migration.
+The MSA migration research is mature based on the publication venues and research
+types utilized. The research field is scattered across many publication venues. There are
+notable technical, managerial, and organizational challenges and differing motivations.
+We have included our recommendations for future research in the discussion section. We
+will continue conducting research in this field with survey and interview studies to study
+industry practitioner’s challenges and motivations to understand the current problems and
+pitfalls that affect the migration processes and the reverse engineering and re-engineering
+tasks required.
+Information about funding/support sources
+We received no funding for this research.
